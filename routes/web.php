@@ -11,14 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::get('/', 'UserController@index')
+->middleware('auth')
+->name('users.index');
+
+Route::group(['prefix' => 'users', 'as' => 'users.', 'middleware' => 'auth'], function () {
+    Route::post('/swipes', 'SwipesController@store')->name('swipes.store');
+    Route::get('/matches', 'UserController@match')->name('match');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

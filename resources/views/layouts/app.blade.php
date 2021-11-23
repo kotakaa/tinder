@@ -15,63 +15,74 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
+        <div class="tbg">
+            <div class="theader">
+                <nav class="navbar navbar-expand-md navbar-light bg-white">
+                    <div class="container" style="width: auto;">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <!-- Left Side Of Navbar -->
+                            <div  class="nav-flex">
+                                @auth
+                                    <div class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            <i class="fa fa-cog" aria-hidden="true"></i>
                                         </a>
+    
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="text-align: center">
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+    
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endauth
+                            
+                                <div class="nav-item">
+                                    <a class="navbar-brand" href="{{ url('/') }}">
+                                        <img src="https://worldvectorlogo.com/logos/tinder-1.svg" alt="Tinder Logo" title="Tinder Logo" style="width: 100px">
+                                    </a>
+                                </div>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                                @guest
+                                    @if (Route::has('login'))
+                                        <div class="nav-item">
+                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                        </div>
+                                    @endif
+    
+                                    @if (Route::has('register'))
+                                        <div class="nav-item">
+                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        </div>
+                                    @endif
+                                @else
+                                    <div class="nav-item">
+                                        <a class="nav-link" href="{{route('users.match')}}">
+                                            <i class="fa fa-comments" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                @endguest
+                            </div>
+                        </div>
+                    </div>
+                </nav>
             </div>
-        </nav>
-
-        @yield('content')
+    
+            @if (session('flash_message'))
+                <div class="flash_message bg-success text-center py-3 my-0">
+                    {{ session('flash_message') }}
+                </div>
+            @endif
+    
+            <div class="tbgwrap">
+                @yield('content')
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
