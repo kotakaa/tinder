@@ -18,5 +18,6 @@ Route::get('/', 'UserController@index')
 ->name('users.index');
 
 Route::group(['prefix' => 'users', 'as' => 'users.', 'middleware' => 'auth'], function () {
-    //
+    Route::post('/swipes', 'SwipesController@store')->name('swipes.store');
+    Route::get('/matches', 'UserController@match')->name('match');
 });

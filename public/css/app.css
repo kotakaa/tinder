@@ -14492,6 +14492,21 @@ a {
   color: #8b8b8b;
 }
 
+.round-image {
+  width: 7rem;
+  height: 7rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
+.image {
+  width: 35rem;
+  height: 35rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .nav-flex {
   display: -webkit-box;
   display: -ms-flexbox;

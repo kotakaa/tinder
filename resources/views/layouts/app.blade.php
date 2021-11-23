@@ -62,7 +62,7 @@
                                     @endif
                                 @else
                                     <div class="nav-item">
-                                        <a class="nav-link" href="">
+                                        <a class="nav-link" href="{{route('users.match')}}">
                                             <i class="fa fa-comments" aria-hidden="true"></i>
                                         </a>
                                     </div>

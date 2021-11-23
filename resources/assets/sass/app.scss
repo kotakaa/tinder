@@ -20,6 +20,18 @@ ul{
 a{
   color: #8b8b8b;
 }
+.round-image{
+  width: 7rem;
+  height: 7rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.image{
+  width: 35rem;
+  height: 35rem;
+  object-fit: cover;
+}
 .nav-flex{
   display: flex;
   justify-content: space-evenly;
